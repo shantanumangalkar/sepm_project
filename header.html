@@ -1,0 +1,471 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> E-Store</title>
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    <!-- EXTERNAL LINKS -->
+    <link rel="stylesheet" href="css/header.css">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <style>
+    body
+    {
+        margin: 0;
+        padding-top: 80px; /* Added to account for fixed header */
+    }
+    #badge
+    {
+        background-color: rgb(255, 30, 30);
+        color: white;
+        border-radius: 50%;
+        padding: 5px 8px;
+        font-size: 16px;
+        top: 10px;
+        right:158px;
+    }
+    .loginBtn {
+        margin-left: 15px;
+        background-color: rgb(238, 204, 204);
+        color: rgb(255, 255, 255);
+        padding: 8px 16px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.3s ease;
+    }
+
+    .loginBtn:hover {
+        background-color: rgb(169, 141, 141);
+    }
+
+    #container
+    {
+        background-color: white;
+        margin: auto;
+        text-align: center;
+        width: 100%;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: 1.5fr 1.5fr 5fr 1fr;
+        font-family: 'Lato', sans-serif;
+        z-index: 1000;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 40px;
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149); 
+    }
+    #shopName 
+    {
+        font-size: 40px; 
+        font-family: 'Lato', sans-serif;
+    }
+    #shopName a
+    {
+        text-decoration: none;
+        color: rgb(29, 29, 29);
+    }
+    #shopName > b
+    {
+        font-weight: 900;
+        font: black;
+    }
+
+    #collection
+    {
+        font-weight: bold;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    #collection a
+    {
+        text-decoration: none;
+        color: rgb(29, 29, 29);
+    }
+
+    .search
+    {
+        padding: 14px;
+        color: rgb(29, 29, 29);
+        min-width: 25px;
+        text-align: center;
+        position: absolute;
+    }
+
+    .addedToCart
+    {
+        font-size: 1.5em;
+        margin-right: 25px;
+        position: relative;
+    }
+    #user
+    {
+        display: flex;
+        align-items: center;
+    }
+
+    .userIcon
+    {
+        font-size: 45px;
+    }
+    #input 
+    {
+        width: 35em;
+        height: 3em;
+        padding: 2px 50px;
+        background-color: rgb(241, 241, 241);
+        border: none;
+        border-radius: 5px;
+    }
+    #input::placeholder
+    {
+        font-weight: bold;
+    }
+    #input:focus
+    {
+        outline: none;
+    }
+    #user a
+    {
+        color: rgb(29, 29, 29)
+    }
+
+    /* Mobile menu styles */
+    .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 10px;
+    }
+
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        z-index: 999;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .mobile-menu.active {
+        display: block;
+    }
+
+    .mobile-menu a {
+        display: block;
+        padding: 10px 0;
+        text-decoration: none;
+        color: rgb(29, 29, 29);
+        font-weight: bold;
+        border-bottom: 1px solid #eee;
+    }
+
+    .mobile-menu a:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-menu .loginBtn {
+        display: inline-block;
+        margin: 15px 0 0 0;
+    }
+
+    /* ----------------------------- MEDIA QUERY --------------------------- */
+
+    @media(max-width: 1300px)
+    {
+        #collection
+        {
+            font-size: 13px;
+        }
+        #input 
+        {
+            width: 25em;
+        }
+    }
+    @media(max-width: 1212px)
+    {
+        #collection
+        {
+            font-size: 13px;
+        }
+        #input 
+        {
+            width: 20em;
+        }
+        .addedToCart
+        {
+            font-size: 1.5em;
+            margin: 10px 20px;
+        }
+    }
+
+    @media(max-width: 1090px)
+    {
+        #container
+        {
+            display: grid;
+            grid-template-columns: 1fr 2fr 0.5fr;
+        }
+        #search
+        {
+            display: none;
+        }
+    }
+    @media(max-width: 768px)
+    {
+        #container {
+            grid-template-columns: 1fr auto;
+            padding: 15px 20px;
+        }
+
+        #collection, #user .loginBtn {
+            display: none;
+        }
+
+        .mobile-menu-btn {
+            display: block;
+            order: 1;
+        }
+
+        #shopName {
+            order: 0;
+            font-size: 28px;
+            text-align: left;
+        }
+
+        #user {
+            order: 2;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+    }
+
+    @media(max-width: 550px)
+    {
+        #container 
+        {
+            padding: 15px;
+        }
+        
+        #shopName
+        {
+            font-size: 24px;
+        }
+        
+        .userIcon
+        {
+            font-size: 35px;
+        }
+        
+        .addedToCart
+        {
+            font-size: 1.2em;
+        }
+    }
+
+    /* badge media */
+    @media(max-width: 1480px)
+    {
+        #badge
+        {
+            right:150px;
+        }
+    }
+    @media(max-width: 1426px)
+    {
+        #badge
+        {
+            right:142px;
+        }
+    }
+    @media(max-width: 1360px)
+    {
+        #badge
+        {
+            right:136px;
+        }
+    }
+    @media(max-width: 1320px)
+    {
+        #badge
+        {
+            right:129px;
+        }
+    }
+    @media(max-width: 1259px)
+    {
+        #badge
+        {
+            right:119px;
+        }
+    }
+    @media(max-width: 1212px)
+    {
+        #badge
+        {
+            right: 96px;
+        }
+    }
+    @media(max-width: 1155px)
+    {
+        #badge
+        {
+            right: 87px;
+        }
+    }
+    @media(max-width: 1090px)
+    {
+        #badge
+        {
+            right: 119px;
+        }
+    }
+    @media(max-width: 1030px)
+    {
+        #badge
+        {
+            right: 109px;
+        }
+    }
+    @media(max-width: 970px)
+    {
+        #badge
+        {
+            right: 100px;
+        }
+    }
+    @media(max-width: 910px)
+    {
+        #badge
+        {
+            right: 94px;
+        }
+    }
+    @media(max-width: 850px)
+    {
+        #badge
+        {
+            right: 87px;
+        }
+    }
+    @media(max-width: 768px)
+    {
+        #badge {
+            right: 60px;
+            top: 12px;
+            padding: 3px 6px;
+            font-size: 12px;
+        }
+    }
+    @media(max-width: 550px)
+    {
+        #badge
+        {
+            right: 50px;
+            top: 12px;
+        }
+    }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <section>
+            <!-- MAIN CONTAINER -->
+            <div id="container">
+                <!-- SHOP NAME -->
+                <div id="shopName">
+                    <img src="./img/Screenshot_2025-04-26_092344-removebg-preview.png" alt="#" style="height: 50px; width: 110px;">
+                </div>
+                
+                <!-- COLLCETIONS ON WEBSITE -->
+                <div id="collection">
+                    <div id="clothing"><a href="clothing.html"> CLOTHING </a></div>
+                    <div id="accessories"><a href="accessories.html"> ACCESSORIES </a></div>
+                </div>
+                
+                <!-- SEARCH SECTION -->
+                <div id="search">
+                    <i class="fas fa-search search"></i>
+                    <input type="text" id="input" name="searchBox" placeholder="Search for Clothing and Accessories">
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <!-- USER SECTION (CART AND USER ICON) -->
+                <div id="user">
+                    <h3 id="cart">Cart</h3>
+                    <a href="cart.html">
+                        <i class="fas fa-shopping-cart addedToCart">
+                            <div id="badge">0</div>
+                        </i>
+                    </a>
+                    <a href="#"><i class="fas fa-user-circle userIcon"></i></a>
+                    <a href="login.html" class="loginBtn">Login</a>
+                </div>
+            </div>
+
+            <!-- Mobile menu (hidden by default) -->
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="clothing.html">CLOTHING</a>
+                <a href="accessories.html">ACCESSORIES</a>
+                <a href="login.html" class="loginBtn">LOGIN</a>
+            </div>
+
+        </section>
+    </header>
+
+    <script>
+        // Toggle mobile menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            
+            // Change icon between bars and times
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && event.target !== mobileMenuBtn && !mobileMenuBtn.contains(event.target)) {
+                mobileMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
+
+</body>
+</html>
